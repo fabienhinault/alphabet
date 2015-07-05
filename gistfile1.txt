@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script>
+    window.addEventListener( "keypress", doKeyDown, false );
+  </script>
+  
+  </head>
+  <body>
+    <audio id="audioA" src="./audiocheck.net_C4.mp3" >
+    </audio>
+  </body>
+</html>
