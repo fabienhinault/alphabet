@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    text-align: center;
+    font-family: "Sans Serif";
+}
+* {margin: 0;}
+
+#letters{
+    height:1em;
+    font-size: 100px;
+}
+
+.click{
+    text-decoration: underline;
+    cursor: pointer;
+}
