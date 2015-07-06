@@ -6,8 +6,10 @@ body {
 * {margin: 0;}
 
 #letters{
-    height:1em;
+    height:1.2em;
     font-size: 100px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .click{

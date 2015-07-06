@@ -27,12 +27,20 @@ var current = letterStates[0];
 var letterLine = document.getElementById("letters");
 var hint;
 
+var fixLetterLine = function(){
+  while(letterLine.scrollWidth > letterLine.offsetWidth){
+    letterLine.innerHTML = letterLine.innerHTML.substring(1);
+  }
+}
 LetterState.prototype.onRightKeyPress = function(){
   document.getElementById(this.audioId).play();
   // assert this === current;
   current = this.next;
   letterLine.innerHTML = letterLine.innerHTML +
     this.letter.toUpperCase() + " ";
+  console.log(letterLine.scrollWidth);
+  console.log(letterLine.offsetWidth);
+  fixLetterLine();
 };
 
 LetterState.prototype.onWrongKeyPress = function(){
@@ -42,6 +50,7 @@ LetterState.prototype.onWrongKeyPress = function(){
   var hintText = document.createTextNode(this.letter.toUpperCase());
   hint.appendChild(hintText);
   letterLine.appendChild(hint);
+  fixLetterLine();
   current = new LetterErrorState(this.letter, this.audioId, this.next);
 }
 
@@ -56,7 +65,7 @@ LetterState.prototype.onKeyPress = function(e){
 LetterErrorState.prototype = Object.create(LetterState.prototype);
 
 LetterErrorState.prototype.onRightKeyPress = function(){
-  letterLine.removeChild(hint);
+  letterLine.removeChild(document.getElementById("hint"));
   LetterState.prototype.onRightKeyPress.call(this);
 }
 
