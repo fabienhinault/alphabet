@@ -5,6 +5,7 @@
     letter,
     i,
     current,
+    playing = document.getElementById("audio_z"),
     letterLine = document.getElementById("letters"),
     hint,
     colors = ['#EC438E', '#50B1D8', '#1CCF2A', '#EF394B', '#F08F07',
@@ -39,10 +40,10 @@
     }
   }
 
-
-
   LetterState.prototype.onRightLetter = function () {
-    document.getElementById(this.audioId).play();
+    playing.pause();
+    playing = document.getElementById(this.audioId);
+    playing.play();
     // assert this === current;
     current = this.next;
     letterLine.innerHTML = letterLine.innerHTML + '<span style="color:' +
