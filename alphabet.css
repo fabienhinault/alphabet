@@ -21,13 +21,6 @@ body {
 }
 
 .key{
-  font-size: 30px;
-  display: inline-block;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
-  width: 1em;
-  text-align:center;
-  margin: 0.1em;
-  background-color: white;
+  font-size: 32px;
+  width: 1.5em;
 }

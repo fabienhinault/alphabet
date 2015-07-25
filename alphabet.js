@@ -41,9 +41,11 @@
   }
 
   LetterState.prototype.onRightLetter = function () {
-    playing.pause();
+    var last = playing;
     playing = document.getElementById(this.audioId);
+    last.pause();
     playing.play();
+    last.load();
     // assert this === current;
     current = this.next;
     letterLine.innerHTML = letterLine.innerHTML + '<span style="color:' +
@@ -83,13 +85,14 @@
   };
 
   function onKey(e) {
-    onLetter(e.key || String.fromCharCode(e.keyCode));
-  }
-  function onLetter(letter) {
+    var letter = e.key || String.fromCharCode(e.keyCode);
     if (!(letter in ignored)){
       ignored[letter] = true;
-      current.onLetter(letter);
+      onLetter(letter);
     }
+  }
+  function onLetter(letter) {
+      current.onLetter(letter);
   }
 
   window.addEventListener("keypress", onKey, false);
@@ -97,7 +100,7 @@
   function onKeyUp(e) {
     var letter = e.key || String.fromCharCode(e.keyCode);
     if (letter in ignored){
-      delete ignored[letter] ;
+      delete ignored[letter];
     }
   }
 
@@ -121,7 +124,7 @@
   setOnKeyClick();
 
   document.getElementById("swap").onclick = function () {
-    var i = Math.floor(Math.random() * 26),
+    var i = Math.floor(Math.random() * 25),
       key = document.getElementById("keys").children.item(i);
     key.parentNode.insertBefore(key.nextSibling, key);
   };
@@ -130,7 +133,7 @@
     document.getElementById("keys").innerHTML =
       _.map(_.range(26),
             function (i) {
-          return '<div class="key">' + String.fromCharCode(i + 65) + "</div>";
+          return '<button class="key">' + String.fromCharCode(i + 65) + "</button>";
         }
            ).join("");
     setOnKeyClick();
