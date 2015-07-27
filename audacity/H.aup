@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="H_data" version="1.3.0" audacityversion="2.0.6" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="441.9303797468" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + millisecondes">
+	<tags>
+		<tag name="TRACKNUMBER" value="1"/>
+		<tag name="Encoded by" value="Online Media Technologies"/>
+	</tags>
+	<wavetrack name="H" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="66160">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000324.au" len="66160" min="-0.164105" max="0.146306" rms="0.017969"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="H" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="66160">
+				<waveblock start="0">
+					<simpleblockfile filename="e00002e4.au" len="66160" min="-0.456135" max="0.465142" rms="0.045711"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
