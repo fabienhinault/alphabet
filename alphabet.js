@@ -1,7 +1,11 @@
 (function () {
   'use strict';
 
-  var letterStates = [],
+  var range_AZ = _.range(65, 65 + 26)
+      .map(function (i) {return String.fromCharCode(i); }),
+    range_az = _.range(97, 97 + 26)
+      .map(function (i) {return String.fromCharCode(i); }),
+    letterStates = [],
     letter,
     i,
     current,
@@ -10,7 +14,35 @@
     hint,
     colors = ['#EC438E', '#50B1D8', '#1CCF2A', '#EF394B', '#F08F07',
               '#F4EA39', '#AB00D8'], //, '#FF6801', '#EC438E', '', '', ''],
-    ignored = {};
+    ignored = {},
+    orderBtn = document.getElementById("order"),
+    pianoNotes =
+      { a: "C4",
+        b: "C4",
+        c: "G4",
+        d: "G4",
+        e: "A4",
+        f: "A4",
+        g: "G4",
+        h: "F4",
+        i: "F4",
+        j: "E4",
+        k: "E4",
+        l: "D4",
+        m: "D4",
+        n: "D4",
+        o: "C4",
+        p: "G4",
+        q: "G4",
+        r: "F4",
+        s: "F4",
+        t: "E4",
+        u: "E4",
+        v: "D4",
+        w: "G4",
+        x: "F4",
+        y: "E4",
+        z: "D4"};
 
   function LetterState(letter, audioId) {
     this.letter = letter;
@@ -84,22 +116,22 @@
     hint.style.color = "gray";
   };
 
+  function onLetter(letter) {
+    current.onLetter(letter);
+  }
   function onKey(e) {
     var letter = e.key || String.fromCharCode(e.keyCode);
-    if (!(letter in ignored)){
+    if (!(ignored.hasOwnProperty(letter))) {
       ignored[letter] = true;
       onLetter(letter);
     }
-  }
-  function onLetter(letter) {
-      current.onLetter(letter);
   }
 
   window.addEventListener("keypress", onKey, false);
 
   function onKeyUp(e) {
     var letter = e.key || String.fromCharCode(e.keyCode);
-    if (letter in ignored){
+    if (ignored.hasOwnProperty(letter)) {
       delete ignored[letter];
     }
   }
@@ -115,7 +147,7 @@
     [].forEach.call(document.getElementById("keys").children,
       function (key) {
         var letter = key.innerHTML.substring(0, 1).toLowerCase();
-        key.onclick = function (e) {
+        key.onmousedown = function (e) {
           onLetter(letter);
         };
       }
@@ -129,7 +161,7 @@
     key.parentNode.insertBefore(key.nextSibling, key);
   };
 
-  document.getElementById("ordered").onclick = function () {
+  orderBtn.onclick = function () {
     document.getElementById("keys").innerHTML =
       _.map(_.range(26),
             function (i) {
@@ -138,14 +170,34 @@
            ).join("");
     setOnKeyClick();
   };
-  document.getElementById("ordered").onclick();
+  orderBtn.onclick();
 
   document.getElementById("shuffle").onclick = function () {
+    var i;
     for (i = 0; i < 40; i = i + 1) {
       document.getElementById("swap").onclick();
     }
   };
+  
+  document.getElementById("piano").onclick = function () {
+    range_az.forEach(function (a) {
+      var audio = document.getElementById("audio_" + a);
+      audio.src = "audiocheck.net_" + pianoNotes[a] + ".mp3";
+      audio.load();
+    });
+  };
+  
+  document.getElementById("mouth").onclick = function () {
+    range_az.forEach(function (a) {
+      var audio = document.getElementById("audio_" + a);
+      audio.src = a.toUpperCase() + ".mp3";
+      audio.load();
+    });
+  };
 
+  document.getElementById("micro").onclick =
+    document.getElementById("mouth").onclick;
+  
 //  document.getElementById("shuffle").onclick = function () {
 //    for (i = 0; i < 26; i = i + 1) {
 //      var keys = document.getElementById("keys");
