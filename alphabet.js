@@ -42,7 +42,9 @@
         w: "G4",
         x: "F4",
         y: "E4",
-        z: "D4"};
+        z: "D4"},
+    voices = {},
+    voice = document.getElementById("voice");
 
   function LetterState(letter, audioId) {
     this.letter = letter;
@@ -75,9 +77,9 @@
   LetterState.prototype.onRightLetter = function () {
     var last = playing;
     playing = document.getElementById(this.audioId);
-    last.pause();
+//    last.pause();
     playing.play();
-    last.load();
+//    last.load();
     // assert this === current;
     current = this.next;
     letterLine.innerHTML = letterLine.innerHTML + '<span style="color:' +
@@ -179,24 +181,40 @@
     }
   };
   
-  document.getElementById("piano").onclick = function () {
-    range_az.forEach(function (a) {
-      var audio = document.getElementById("audio_" + a);
-      audio.src = "audiocheck.net_" + pianoNotes[a] + ".mp3";
+  function loadVoice(fLoadLetterFile) {
+    range_az.forEach(function (letter) {
+      var audio = document.getElementById("audio_" + letter);
+      audio.src = fLoadLetterFile(letter);
       audio.load();
     });
+  }
+  
+  function loadPiano() {
+    loadVoice(function (letter) {
+      return "mp3/piano/audiocheck.net_" + pianoNotes[letter] + ".mp3";
+    });
+  }
+
+  function loadSinger() {
+    loadVoice(function (letter) {
+      return "mp3/singer/" + letter.toUpperCase() + ".mp3";
+    });
+  }
+  voices.loadPiano = loadPiano;
+  voices.loadSinger = loadSinger;
+  
+  loadPiano();
+  
+  voice.onchange = function(){
+    voices[voice.value]();
   };
   
-  document.getElementById("mouth").onclick = function () {
-    range_az.forEach(function (a) {
-      var audio = document.getElementById("audio_" + a);
-      audio.src = a.toUpperCase() + ".mp3";
-      audio.load();
-    });
-  };
+/*  document.getElementById("piano").onclick = loadPiano;
+  
+  document.getElementById("mouth").onclick = loadSinger;
 
-  document.getElementById("micro").onclick =
-    document.getElementById("mouth").onclick;
+  document.getElementById("micro").onclick = loadSinger;*/
+    
   
 //  document.getElementById("shuffle").onclick = function () {
 //    for (i = 0; i < 26; i = i + 1) {
