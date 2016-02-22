@@ -3,14 +3,14 @@
   src: url('fonts/SymbolaSubset.eot'); /* IE9 Compat Modes */
   src: url('fonts/SymbolaSubset.woff') format('woff'), /* Pretty Modern Browsers */
        url('fonts/SymbolaSubset.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/SymbolaSubset.svg#svgFontName') format('svg'); /* Legacy iOS */
+       url('fonts/SymbolaSubset.svg') format('svg'); /* Legacy iOS */
 }
 @font-face {
   font-family: 'dejavu';
-  src: url('fonts/DejavuSubset.eot'); /* IE9 Compat Modes */
-  src: url('fonts/DejavuSubset.woff') format('woff'), /* Pretty Modern Browsers */
-       url('fonts/DejavuSubset.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/DejavuSubset.svg#svgFontName') format('svg'); /* Legacy iOS */
+  src: url('fonts/DejaVuSansSubset.eot'); /* IE9 Compat Modes */
+  src: url('fonts/DejaVuSansSubset.woff') format('woff'), /* Pretty Modern Browsers */
+       url('fonts/DejaVuSansSubset.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/DejaVuSansSubset.svg') format('svg'); /* Legacy iOS */
 }
 
 body {
