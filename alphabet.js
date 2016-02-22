@@ -110,12 +110,18 @@
     fixLetterLine();
   };
   
+  function createIdPlayer(id) {
+    return function () {
+      document.getElementById(id).play();
+    };
+  }
+  
   LetterState.prototype.onDigit = function (n) {
-    var start = Math.min(0, this.i - n);
-    for (iLetter = start; iLetter < this.i - 1; iLetter = iLetter + 1){
-      document.getElementById("audio_" + String.fromCharCode(97 + iLetter)).onended = function() {
-        document.getElementById("audio_" + String.fromCharCode(97 + iLetter)).play();
-      }
+    var start = Math.max(0, this.i - n),
+      iLetter;
+    for (iLetter = start; iLetter < this.i - 1; iLetter = iLetter + 1) {
+      document.getElementById("audio_" + String.fromCharCode(97 + iLetter)).onended =
+        createIdPlayer("audio_" + String.fromCharCode(97 + iLetter + 1));
     }
     document.getElementById("audio_" + String.fromCharCode(97 + start)).play();
   };
@@ -229,7 +235,7 @@
   // initial letter buttons display
   orderBtn.onclick();
   
-  function setupDigits () {
+  function setupDigits() {
     document.getElementById("digits").innerHTML =
       _.map(_.range(1, 9),
         function (i) {
@@ -237,7 +243,7 @@
         }).join("");
   }
   
-  setupDigits ();
+  setupDigits();
 
   document.getElementById("shuffle").onclick = function () {
     var i;
@@ -274,18 +280,5 @@
     voices[voice.value]();
   };
   
-/*  document.getElementById("piano").onclick = loadPiano;
-  
-  document.getElementById("mouth").onclick = loadSinger;
-
-  document.getElementById("micro").onclick = loadSinger;*/
-    
-  
-//  document.getElementById("shuffle").onclick = function () {
-//    for (i = 0; i < 26; i = i + 1) {
-//      var keys = document.getElementById("keys");
-//      keys.insertBefore(keys.children.item(i), _.sample(keys.children));
-//    }
-//  };
 
 }());
