@@ -44,9 +44,13 @@
         y: "E4",
         z: "D4"},
     voices = {},
-    voice = document.getElementById("voice");
+    voice = document.getElementById("voice"),
+    canPlayMultiple = false;
 
-  function LetterState(letter, audioId) {
+
+  
+  function LetterState(i, letter, audioId) {
+    this.i = i;
     this.letter = letter;
     this.audioId = audioId;
   }
@@ -59,7 +63,7 @@
 
   for (i = 0; i < 26; i = i + 1) {
     letter = String.fromCharCode(97 + i);
-    letterStates[i] = new LetterState(letter, "audio_" + letter);
+    letterStates[i] = new LetterState(i, letter, "audio_" + letter);
   }
   for (i = 1; i < letterStates.length;  i = i + 1) {
     letterStates[i - 1].next = letterStates[i];
@@ -74,18 +78,46 @@
     }
   }
 
-  LetterState.prototype.onRightLetter = function () {
+  LetterState.prototype.displayNext = function () {
+    letterLine.innerHTML = letterLine.innerHTML + '<span style="color:' +
+      _.sample(colors) + '">' + this.letter.toUpperCase() + '</span>' +
+      " ";
+    fixLetterLine();
+  };
+  
+  LetterState.prototype.cutAndPlayNext = function () {
     var last = playing;
     playing = document.getElementById(this.audioId);
-//    last.pause();
+    last.pause();
     playing.play();
-//    last.load();
-    // assert this === current;
+    // back to beginning for next play
+    last.load();
+  };
+  
+  LetterState.prototype.playNext = LetterState.prototype.cutAndPlayNext;
+  
+  LetterState.prototype.PlayNextNoCut = function () {
+    playing = document.getElementById(this.audioId);
+    playing.play();
+  };
+  
+  LetterState.prototype.onRightLetter = function () {
+    this.playNext();
     current = this.next;
     letterLine.innerHTML = letterLine.innerHTML + '<span style="color:' +
       _.sample(colors) + '">' + this.letter.toUpperCase() + '</span>' +
       " ";
     fixLetterLine();
+  };
+  
+  LetterState.prototype.onDigit = function (n) {
+    var start = Math.min(0, this.i - n);
+    for (iLetter = start; iLetter < this.i - 1; iLetter = iLetter + 1){
+      document.getElementById("audio_" + String.fromCharCode(97 + iLetter)).onended = function() {
+        document.getElementById("audio_" + String.fromCharCode(97 + iLetter)).play();
+      }
+    }
+    document.getElementById("audio_" + String.fromCharCode(97 + start)).play();
   };
 
   LetterState.prototype.onWrongLetter = function () {
@@ -109,6 +141,29 @@
 
   LetterErrorState.prototype = Object.create(LetterState.prototype);
 
+  function testMultiplePlaying() {
+    var test1 = document.getElementById("test1"),
+      test2 = document.getElementById("test2"),
+      counter = 0;
+    [test1, test2].forEach(function (audio) {
+      audio.addEventListener('loadedmetadata', function () {
+        audio.volume = 0;
+        audio.play();
+      }, false);
+      audio.addEventListener('playing', function () {
+        counter = counter + 1;
+        if (counter === 2) {
+          canPlayMultiple = true;
+          LetterState.prototype.playNext = LetterState.prototype.PlayNextNoCut;
+        }
+      }, false);
+    });
+    test1.src = "mp3/piano/audiocheck.net_C4.mp3";
+    test2.src = "mp3/piano/audiocheck.net_C4.mp3";
+  }
+  
+  testMultiplePlaying();
+  
   LetterErrorState.prototype.onRightLetter = function () {
     letterLine.removeChild(document.getElementById("hint"));
     LetterState.prototype.onRightLetter.call(this);
@@ -152,8 +207,7 @@
         key.onmousedown = function (e) {
           onLetter(letter);
         };
-      }
-      );
+      });
   }
   setOnKeyClick();
 
@@ -168,11 +222,22 @@
       _.map(_.range(26),
             function (i) {
           return '<button class="key">' + String.fromCharCode(i + 65) + "</button>";
-        }
-           ).join("");
+        }).join("");
     setOnKeyClick();
   };
+  
+  // initial letter buttons display
   orderBtn.onclick();
+  
+  function setupDigits () {
+    document.getElementById("digits").innerHTML =
+      _.map(_.range(1, 9),
+        function (i) {
+          return '<span class="digit">' + i + "</span> ";
+        }).join("");
+  }
+  
+  setupDigits ();
 
   document.getElementById("shuffle").onclick = function () {
     var i;
@@ -205,7 +270,7 @@
   
   loadPiano();
   
-  voice.onchange = function(){
+  voice.onchange = function () {
     voices[voice.value]();
   };
   

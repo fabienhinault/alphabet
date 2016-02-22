@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg>
+<metadata>
+Created by FontForge 20120731 at Mon Jan 25 12:07:06 2016
+ By Fabien Hinault,,,
+Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved.
+Copyright (c) 2006 by Tavmjong Bah. All Rights Reserved.
+DejaVu changes are in public domain
+
+</metadata>
+<defs>
+<font id="DejaVuSans" horiz-adv-x="2048" >
+  <font-face 
+    font-family="DejaVu Sans"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="2048"
+    panose-1="2 11 6 3 3 8 4 2 2 4"
+    ascent="1556"
+    descent="-492"
+    bbox="98 -350 1069 1638"
+    underline-thickness="90"
+    underline-position="-85"
+    unicode-range="U+0061-02C6"
+  />
+<missing-glyph 
+ />
+    <glyph glyph-name=".notdef" 
+ />
+    <glyph glyph-name=".null" horiz-adv-x="0" 
+ />
+    <glyph glyph-name="nonmarkingreturn" 
+ />
+    <glyph glyph-name="a" unicode="a" horiz-adv-x="1255" 
+d="M702 563q-223 0 -309 -51t-86 -174q0 -98 64.5 -155.5t175.5 -57.5q153 0 245.5 108.5t92.5 288.5v41h-183zM1069 639v-639h-184v170q-63 -102 -157 -150.5t-230 -48.5q-172 0 -273.5 96.5t-101.5 258.5q0 189 126.5 285t377.5 96h258v18q0 127 -83.5 196.5t-234.5 69.5
+q-96 0 -187 -23t-175 -69v170q101 39 196 58.5t185 19.5q243 0 363 -126t120 -382z" />
+    <glyph glyph-name="brokenbar" unicode="&#xa6;" horiz-adv-x="690" 
+d="M430 408v-758h-170v758h170zM430 1432v-758h-170v758h170z" />
+    <glyph glyph-name="threesuperior" unicode="&#xb3;" horiz-adv-x="821" 
+d="M524 1120q92 -18 142.5 -72.5t50.5 -136.5q0 -124 -95 -191t-272 -67q-57 0 -119.5 10.5t-132.5 30.5v121q52 -27 111.5 -40t126.5 -13q109 0 169 39.5t60 109.5q0 74 -55.5 112t-163.5 38h-86v108h94q94 0 142.5 31.5t48.5 91.5q0 58 -50 88.5t-145 30.5q-40 0 -91 -9
+t-132 -32v115q73 17 137 26t119 9q144 0 228.5 -59t84.5 -158q0 -69 -45 -117t-127 -66z" />
+    <glyph glyph-name="acircumflex" unicode="&#xe2;" horiz-adv-x="1255" 
+d="M702 563q-223 0 -309 -51t-86 -174q0 -98 64.5 -155.5t175.5 -57.5q153 0 245.5 108.5t92.5 288.5v41h-183zM1069 639v-639h-184v170q-63 -102 -157 -150.5t-230 -48.5q-172 0 -273.5 96.5t-101.5 258.5q0 189 126.5 285t377.5 96h258v18q0 127 -83.5 196.5t-234.5 69.5
+q-96 0 -187 -23t-175 -69v170q101 39 196 58.5t185 19.5q243 0 363 -126t120 -382zM520 1638h148l245 -376h-139l-180 245l-180 -245h-139z" />
+    <glyph glyph-name="circumflex" unicode="&#x2c6;" horiz-adv-x="1024" 
+d="M438 1638h148l245 -376h-139l-180 245l-180 -245h-139z" />
+  </font>
+</defs></svg>
